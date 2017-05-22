@@ -5,3 +5,10 @@ D:\projects\BachalourWork\Parallel_algorithm\BachelorWork\GraphsService\bin\Debu
 D:\projects\BachalourWork\Parallel_algorithm\BachelorWork\GraphsService\bin\Debug\GraphsExtensibility.pdb
 D:\projects\BachalourWork\Parallel_algorithm\BachelorWork\GraphsService\obj\Debug\GraphsService.dll
 D:\projects\BachalourWork\Parallel_algorithm\BachelorWork\GraphsService\obj\Debug\GraphsService.pdb
+E:\марк\BachelourWork\GraphsService\bin\Debug\GraphsService.dll
+E:\марк\BachelourWork\GraphsService\bin\Debug\GraphsService.pdb
+E:\марк\BachelourWork\GraphsService\bin\Debug\GraphsExtensibility.dll
+E:\марк\BachelourWork\GraphsService\bin\Debug\GraphsExtensibility.pdb
+E:\марк\BachelourWork\GraphsService\obj\Debug\GraphsService.csprojResolveAssemblyReference.cache
+E:\марк\BachelourWork\GraphsService\obj\Debug\GraphsService.dll
+E:\марк\BachelourWork\GraphsService\obj\Debug\GraphsService.pdb

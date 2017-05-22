@@ -340,7 +340,43 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\sigma.core.js" />
+    <Content Include="Scripts\sigma.export.js" />
+    <Content Include="Scripts\sigma.settings.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="src\captors\sigma.captors.mouse.js" />
+    <Content Include="src\captors\sigma.captors.touch.js" />
+    <Content Include="src\classes\sigma.classes.camera.js" />
+    <Content Include="src\classes\sigma.classes.configurable.js" />
+    <Content Include="src\classes\sigma.classes.dispatcher.js" />
+    <Content Include="src\classes\sigma.classes.graph.js" />
+    <Content Include="src\classes\sigma.classes.quad.js" />
+    <Content Include="src\conrad.js" />
+    <Content Include="src\middlewares\sigma.middlewares.copy.js" />
+    <Content Include="src\middlewares\sigma.middlewares.rescale.js" />
+    <Content Include="src\misc\sigma.misc.animation.js" />
+    <Content Include="src\misc\sigma.misc.bindEvents.js" />
+    <Content Include="src\misc\sigma.misc.drawHovers.js" />
+    <Content Include="src\renderers\canvas\sigma.canvas.edges.arrow.js" />
+    <Content Include="src\renderers\canvas\sigma.canvas.edges.curve.js" />
+    <Content Include="src\renderers\canvas\sigma.canvas.edges.curvedArrow.js" />
+    <Content Include="src\renderers\canvas\sigma.canvas.edges.def.js" />
+    <Content Include="src\renderers\canvas\sigma.canvas.hovers.def.js" />
+    <Content Include="src\renderers\canvas\sigma.canvas.labels.def.js" />
+    <Content Include="src\renderers\canvas\sigma.canvas.nodes.def.js" />
+    <Content Include="src\renderers\sigma.renderers.canvas.js" />
+    <Content Include="src\renderers\sigma.renderers.def.js" />
+    <Content Include="src\renderers\sigma.renderers.webgl.js" />
+    <Content Include="src\renderers\webgl\sigma.webgl.edges.arrow.js" />
+    <Content Include="src\renderers\webgl\sigma.webgl.edges.def.js" />
+    <Content Include="src\renderers\webgl\sigma.webgl.edges.fast.js" />
+    <Content Include="src\renderers\webgl\sigma.webgl.nodes.def.js" />
+    <Content Include="src\renderers\webgl\sigma.webgl.nodes.fast.js" />
+    <Content Include="src\sigma.core.js" />
+    <Content Include="src\sigma.export.js" />
+    <Content Include="src\sigma.settings.js" />
+    <Content Include="src\utils\sigma.polyfills.js" />
+    <Content Include="src\utils\sigma.utils.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -375,6 +411,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\RunExpression.cshtml" />
     <Content Include="Views\Home\ViewResult.cshtml" />
+    <Content Include="Views\Home\ViewParallelForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

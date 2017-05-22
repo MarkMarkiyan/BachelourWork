@@ -3,3 +3,8 @@ D:\projects\BachalourWork\Parallel_algorithm\BachelorWork\GraphsExtensibility\bi
 D:\projects\BachalourWork\Parallel_algorithm\BachelorWork\GraphsExtensibility\obj\Debug\GraphsExtensibility.csprojResolveAssemblyReference.cache
 D:\projects\BachalourWork\Parallel_algorithm\BachelorWork\GraphsExtensibility\obj\Debug\GraphsExtensibility.dll
 D:\projects\BachalourWork\Parallel_algorithm\BachelorWork\GraphsExtensibility\obj\Debug\GraphsExtensibility.pdb
+E:\марк\BachelourWork\GraphsExtensibility\bin\Debug\GraphsExtensibility.dll
+E:\марк\BachelourWork\GraphsExtensibility\bin\Debug\GraphsExtensibility.pdb
+E:\марк\BachelourWork\GraphsExtensibility\obj\Debug\GraphsExtensibility.csprojResolveAssemblyReference.cache
+E:\марк\BachelourWork\GraphsExtensibility\obj\Debug\GraphsExtensibility.dll
+E:\марк\BachelourWork\GraphsExtensibility\obj\Debug\GraphsExtensibility.pdb

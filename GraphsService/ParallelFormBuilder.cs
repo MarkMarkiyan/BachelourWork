@@ -4,7 +4,7 @@ using GraphSharpDemo.Extensibility;
 
 namespace GraphsService
 {
-    class ParallelFormBuilder : IParallelFormBuilder
+    public class ParallelFormBuilder : IParallelFormBuilder
     {
         public List<List<int>> GetParallelForm(int[,] graphAsMatrix)
         {

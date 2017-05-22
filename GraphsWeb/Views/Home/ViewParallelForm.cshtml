@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "ViewParallelForm";
+}
+
+<h2>Максимальна ЯПФ: </h2>
+
+<select>
+    <option value="volvo">Volvo</option>
+    <option value="saab">Saab</option>
+    <option value="mercedes">Mercedes</option>
+    <option value="audi">Audi</option>
+</select>
+
+<script>
+    var model = @Html.Raw(Json.Encode(Model));
+</script>
+
+@*<div id="container" style="height: 500px;" ng-app="mainModule" ng-controller="parallelFormController">
+    <style>
+        #graph-container {
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            position: absolute;
+        }
+    </style>
+    <div id="graph-container"></div>
+</div>*@ 
+
+<div id="lincontainer" style="height: 500px;" ng-app="mainModule" ng-controller="lineralFormController">
+    <style>
+        #lineral-graph-container {
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            position: absolute;
+        }
+    </style>
+    <div id="lineral-graph-container"></div>
+</div> 

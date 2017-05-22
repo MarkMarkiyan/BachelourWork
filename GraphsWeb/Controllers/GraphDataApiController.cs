@@ -24,7 +24,7 @@ namespace GraphsWeb.Controllers
         [HttpGet]
         public List<NodesConnection> GetExampleGraph()
         {
-            var file = fileReaderService.ReadFile(@"D:\projects\BachalourWork\Parallel_algorithm\BachelorWork\Test.txt");
+            var file = fileReaderService.ReadFile(@"E:\марк\BachelourWork\Test.txt");
             var matrix = converter.Convert(file);
             var graphForm = matrixToGraphConverter.Convert(matrix);
             return graphForm;
