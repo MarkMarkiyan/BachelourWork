@@ -88,6 +88,9 @@ namespace GraphsWeb.Controllers
 
         public ActionResult ViewParallelForm() {
             var paralellForm =  parallelFormBuilder.GetParallelForm(TempData["GraphMatrix"] as int[,]);
+
+            if (paralellForm == null)
+                RedirectToAction("RunExpression");
                 return View(new ParallelFormModel {
                 NodesConnections = TempData["Graph"] as List<NodesConnection>,
                 ParallelForm = paralellForm

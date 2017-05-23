@@ -1,43 +1,52 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "ViewParallelForm";
 }
-
-<h2>Максимальна ЯПФ: </h2>
-
-<select>
-    <option value="volvo">Volvo</option>
-    <option value="saab">Saab</option>
-    <option value="mercedes">Mercedes</option>
-    <option value="audi">Audi</option>
-</select>
-
 <script>
     var model = @Html.Raw(Json.Encode(Model));
 </script>
 
-@*<div id="container" style="height: 500px;" ng-app="mainModule" ng-controller="parallelFormController">
+<h2>Максимальна ЯПФ: </h2>
+
+<div id="container" ng-app="mainModule" ng-controller="MainPageController">
     <style>
-        #graph-container {
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            position: absolute;
+        #right-div {
+            right: 0px;
+            display: inline;
         }
     </style>
-    <div id="graph-container"></div>
-</div>*@ 
-
-<div id="lincontainer" style="height: 500px;" ng-app="mainModule" ng-controller="lineralFormController">
+    <div>
+        <button class="btn-info" ng-click="OpenConcurrency()">Обмежити кількість процесорів</button>
+        
+        <div ng-show="concurrencyVisible">
+            <label>Введіть максимальну довжину яруса:</label>
+            <input ng-model="concurrency" />
+        </div>
+        <button class="btn-info" ng-bind="buttonName" ng-click="OpenCPFClick()" />
+    </div>
+    <style>
+        #graph-container {  
+            top: 150px; 
+            bottom: 150px;
+            left: 100px;    
+            right: 100px;
+            height: 500px;
+            display: block;
+            border: 4px black;
+        }
+    </style>
+    <hr/>
+    <br/>
+    <div ng-show="paralellVisible" ng-controller="parallelFormController" id="graph-container"></div>
     <style>
         #lineral-graph-container {
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            position: absolute;
+            top: 150px;
+            bottom: 150px;
+            left: 100px;
+            right: 100px;
+            height: 500px;
+            display: block;
+            border: 4px black;
         }
     </style>
-    <div id="lineral-graph-container"></div>
+    <div id="lineral-graph-container" ng-show="lineralVisible" ng-controller="lineralFormController"></div>
 </div> 

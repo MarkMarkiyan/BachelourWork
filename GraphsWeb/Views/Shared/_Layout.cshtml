@@ -47,17 +47,17 @@
 </head>
 
 <body>
+
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             @*<div class="navbar-header">
                 @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>*@
-            <div class="navbar-collapse collapse">
+            <div class="sidebar-nav">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Головна сторінка", "Index", "Home")</li>
                     <li>@Html.ActionLink("Побудувати ЯПФ", "RunExpression", "Home")</li>
                     <li>@Html.ActionLink("Теоретичні відомості", "About", "Home")</li>
-                    <li>@Html.ActionLink("Побудувати ЯПФ", "Index", "ViewParallelForm")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -67,7 +67,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year</p>
         </footer>
     </div>
     @Scripts.Render("~/bundles/jquery")

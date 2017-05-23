@@ -2,98 +2,32 @@
 
 mainApp.controller('MainPageController',
     function ($scope, $http) {
+        
+        $scope.lineralVisible = true;
+        $scope.paralellVisible = false;
 
-        //$http({ method: 'GET', url: "api/GraphDataApi/GetExampleGraph" }).
-        //    then(function success(response) {
-        //    var nodes = [];
-        //    var edges = [];
-        //    for (var i = 0; i < model.length; i++) {
-        //        nodes.push({
-        //            id: model[i].Parent.Index,
-        //            label: model[i].Parent.Index
-        //        });
-        //        edges.push({
-        //            from: model[i].Parent.Index,
-        //            to: model[i].Child.Index
-        //        });
-        //    }
-        //    nodes.push({
-        //        id: model[model.length - 1].Child.Index,
-        //        label: model[model.length - 1].Child.Index
-        //    });
-        //    var visnodes = new vis.DataSet(nodes);
-        //    var visedges = new vis.DataSet(edges);
+        $scope.buttonName = "Відкрити ярусно-паралельну форму";
+        $scope.concurrency = "";
 
-        //    var container = document.getElementById('mynetwork');
-        //    var data = {
-        //        nodes: visnodes,
-        //        edges: visedges
-        //    };
-        //    var options = {
-        //        layout: {
-        //            randomSeed: undefined,
-        //            improvedLayout: true,
-        //            hierarchical: {
-        //                enabled: true,
-        //                levelSeparation: 80,
-        //                nodeSpacing: 1,
-        //                treeSpacing: 10,
-        //                blockShifting: true,
-        //                edgeMinimization: false,
-        //                parentCentralization: false,
-        //                direction: 'UD',        // UD, DU, LR, RL
-        //                sortMethod: 'directed'  // hubsize, directed
-        //            }
-        //        }
-        //    };
-        //    new vis.Network(container, data, options);
-        //});
-        //});
-        var i,
-       s,
-       N = 100,
-       E = 500,
-       g = {
-           nodes: [],
-           edges: []
-       };
-        var nodes = [];
-        var edges = [];
+        $scope.concurrencyVisible = false;
 
-        g.nodes.push({
-            id: model[model.length - 1].Child.Index.toString(),
-            label: model[model.length - 1].Child.Index,
-            x: Math.random(),
-            y: Math.random(),
-            size: Math.random(),
-            color: '#666'
-        });
-        for (var i = 0; i < model.length; i++) {
-            g.nodes.push({
-                id: model[i].Parent.Index.toString(),
-                label: 'Node ' + i,
-                x: Math.random(),
-                y: Math.random(),
-                size: 10,
-                color: '#666'
-            });
-
-            g.edges.push({
-                id: 'e' + i,
-                source: model[i].Parent.Index.toString(),
-                target: model[i].Child.Index.toString(),
-                size: 5,
-                color: '#ccc'
-            });
+        $scope.OpenConcurrency = function () {
+            $scope.concurrencyVisible = true;
         }
-
-
-        // Instantiate sigma:
-        s = new sigma({
-            graph: g,
-            container: 'graph-container'
-        });
+        $scope.OpenCPFClick = function () {
+            if ($scope.lineralVisible == true) {
+                $scope.lineralVisible = false;
+                $scope.paralellVisible = true;
+                $scope.buttonName = "Відкрити лінійну форму";
+            }
+            else {
+                $scope.lineralVisible = true;
+                $scope.paralellVisible = false;
+                $scope.buttonName = "Відкрити ярусно-паралельну форму";
+            }
+        }
     });
+
 mainApp.controller("runExtensionController",
     function ($scope, $http) {
         $scope.fileNameChanged = function (ele) {
@@ -110,67 +44,75 @@ mainApp.controller("runExtensionController",
     });
 
 mainApp.controller("parallelFormController",
-function () {
-    var i,
-       s,
-       N = 100,
-       E = 500,
-       g = {
-           nodes: [],
-           edges: []
-       };
-    var nodes = [];
-    var edges = [];
+function ($scope) {
+    $scope.concurrency = "amx";
 
-    g.nodes.push({
-        id: model.NodesConnections[model.NodesConnections.length - 1].Child.Index.toString(),
-        label: model.NodesConnections[model.NodesConnections.length - 1].Child.Index,
-        x: 10,
-        y: 50,
-        size: 10,
-        color: '#666'
-    });
+    $scope.concurrencyChanged = function () {
 
-    var levelsLengh = [];
-    for(var i = 0; i < model.ParallelForm.length; i++)
-    {
+    };
+
+    BuildCPF();
+
+    function BuildCPF() {
+        var g = {
+            nodes: [],
+            edges: []
+        };
+
+        var levelsLengh = [];
         levelsLengh.push(0);
-    }
+        for (var i = 1; i < model.ParallelForm.length; i++) {
+            if (i == model.ParallelForm.length - 1) {
+                levelsLengh.push(model.ParallelForm[0].length / 2);
+                g.nodes.push({
+                    id: model.NodesConnections[model.NodesConnections.length - 1].Child.Index.toString(),
+                    label: model.NodesConnections[model.NodesConnections.length - 1].Child.Index,
+                    x: i * 10,
+                    y: model.ParallelForm[0].length * 5,
+                    size: 10,
+                    color: '#666'
+                });
+            }
+            else {
+                levelsLengh.push((model.ParallelForm[0].length - model.ParallelForm[i + 1].length) / 2);
+            }
+        }
 
-    for (var i = 0; i < model.NodesConnections.length; i++) {
-        var level = GetLevel(model.NodesConnections[i].Parent.Index);
-        g.nodes.push({
-            id: model.NodesConnections[i].Parent.Index.toString(),
-            label: 'Node ' + i,
-            y: level*10,
-            x: levelsLengh[level]*10,
-            size: 10,
-            color: '#666'
+        for (var i = 0; i < model.NodesConnections.length; i++) {
+            var level = GetLevel(model.NodesConnections[i].Parent.Index);
+            g.nodes.push({
+                id: model.NodesConnections[i].Parent.Index.toString(),
+                label: 'Node ' + i,
+                y: level * 10,
+                x: levelsLengh[level] * 10,
+                size: 10,
+                color: '#666'
+            });
+            levelsLengh[level]++;
+            g.edges.push({
+                id: 'e' + i,
+                source: model.NodesConnections[i].Parent.Index.toString(),
+                target: model.NodesConnections[i].Child.Index.toString(),
+                size: 5,
+                color: '#ccc'
+            });
+        }
+
+        // Instantiate sigma:
+        s = new sigma({
+            graph: g,
+            container: 'graph-container'
         });
-        levelsLengh[level]++;
-        g.edges.push({
-            id: 'e' + i,
-            source: model.NodesConnections[i].Parent.Index.toString(),
-            target: model.NodesConnections[i].Child.Index.toString(),
-            size: 5,
-            color: '#ccc'
-        });
     }
-
-    // Instantiate sigma:
-    s = new sigma({
-        graph: g,
-        container: 'graph-container'
-    });
-
-    function  GetLevel(index)
-    {
-        var levels = model.ParallelForm;
+    function BuildOptimizeCPF() {
         
-        for (var i = 0; i < levels.length; i++)
-        { 
-            for (var j = 0; j < levels[i].length; j++)
-            {
+    }
+
+    function GetLevel(index) {
+        var levels = model.ParallelForm;
+
+        for (var i = 0; i < levels.length; i++) {
+            for (var j = 0; j < levels[i].length; j++) {
                 if (levels[i][j] == index)
                     return i;
             }
@@ -181,56 +123,66 @@ function () {
 
 mainApp.controller("lineralFormController",
 function () {
-    var i,
-       s,
-       N = 100,
-       E = 500,
-       g = {
-           nodes: [],
-           edges: []
-       };
-    var nodes = [];
-    var edges = [];
 
-    g.nodes.push({
-        id: model.NodesConnections[model.NodesConnections.length - 1].Child.Index.toString(),
-        label: model.NodesConnections[model.NodesConnections.length - 1].Child.Index,
-        x: 10,
-        y: 50,
-        size: 10,
-        color: '#666'
-    });
+    BuildCPF();
+    function BuildCPF() {
+        var g = {
+            nodes: [],
+            edges: []
+        };
+        var countOfArguments = model.ParallelForm[0].length;
+        var countOfLevels = model.ParallelForm.length;
 
-    var levelsLengh = [];
-    for (var i = 0; i < model.ParallelForm.length; i++) {
-        levelsLengh.push(0);
-    }
+        var levelsLengh = 0;
 
-    for (var i = 0; i < model.NodesConnections.length; i++) {
-        var level = GetLevel(model.NodesConnections[i].Parent.Index);
         g.nodes.push({
-            id: model.NodesConnections[i].Parent.Index.toString(),
-            label: 'Node ' + i,
-            y: level * 10,
-            x: levelsLengh[level] * 10,
+            id: model.NodesConnections[model.NodesConnections.length - 1].Child.Index.toString(),
+            label: model.NodesConnections[model.NodesConnections.length - 1].Child.Index,
+            y: countOfLevels * 10,
+            x: countOfArguments * 5,
             size: 10,
             color: '#666'
         });
-        levelsLengh[level]++;
-        g.edges.push({
-            id: 'e' + i,
-            source: model.NodesConnections[i].Parent.Index.toString(),
-            target: model.NodesConnections[i].Child.Index.toString(),
-            size: 5,
-            color: '#ccc'
+
+        for (var i = 0; i < model.NodesConnections.length; i++) {
+            var level = GetLevel(model.NodesConnections[i].Parent.Index);
+
+            if (i < countOfArguments) {
+                g.nodes.push({
+                    id: model.NodesConnections[i].Parent.Index.toString(),
+                    label: 'Node ' + i,
+                    y: 0,
+                    x: levelsLengh * 10,
+                    size: 10,
+                    color: '#666'
+                });
+                levelsLengh++;
+            }
+            else {
+                g.nodes.push({
+                    id: model.NodesConnections[i].Parent.Index.toString(),
+                    label: 'Node ' + i,
+                    y: (i - countOfArguments + 1) * 10,
+                    x: countOfArguments * 5,
+                    size: 10,
+                    color: '#666'
+                });
+            }
+            g.edges.push({
+                id: 'e' + i,
+                source: model.NodesConnections[i].Parent.Index.toString(),
+                target: model.NodesConnections[i].Child.Index.toString(),
+                size: 5,
+                color: '#ccc'
+            });
+        }
+
+        // Instantiate sigma:
+        s = new sigma({
+            graph: g,
+            container: 'lineral-graph-container'
         });
     }
-
-    // Instantiate sigma:
-    s = new sigma({
-        graph: g,
-        container: 'lineral-graph-container'
-    });
 
     function GetLevel(index) {
         var levels = model.ParallelForm;
