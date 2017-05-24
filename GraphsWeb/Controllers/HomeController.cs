@@ -29,29 +29,18 @@ namespace GraphsWeb.Controllers
 
         public ActionResult Index()
         {
-            if (TempData.ContainsKey("Graph"))
-            {
-                var graph = TempData["Graph"];
-                return View(graph);
-            }
-            var file = fileReaderService.ReadFile(@"E:\марк\BachelourWork\Test.txt");
-            var matrix = converter.Convert(file);
-            var graphForm = matrixToGraphConverter.Convert(matrix);
-
-            return View(graphForm);
+            return View();
         }
 
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
-
             return View();
         }
 
@@ -63,31 +52,18 @@ namespace GraphsWeb.Controllers
 
         public ActionResult ViewResult(HttpPostedFileBase file)
         {
-            string path = "";
-
-            // Verify that the user selected a file
-            if (file != null && file.ContentLength > 0)
-            {
-                // extract only the filename
-                var fileName = Path.GetFileName(file.FileName);
-                // store the file inside ~/App_Data/uploads folder
-                path = Path.Combine(Server.MapPath("~/App_Data/"), fileName);
-                file.SaveAs(path);
-            }
-
-            var fileT = fileReaderService.ReadFile(path);
+            var fileT = fileReaderService.ReadTextFromFile(file.InputStream);
             var matrix = converter.Convert(fileT);
 
             var graphForm = matrixToGraphConverter.Convert(matrix);
             TempData["GraphMatrix"] = matrix;
 
             TempData["Graph"] = graphForm;
-            // redirect back to the index action to show the form once again
             return RedirectToAction("ViewParallelForm");
         }
 
         public ActionResult ViewParallelForm() {
-            var paralellForm =  parallelFormBuilder.GetParallelForm(TempData["GraphMatrix"] as int[,]);
+            var paralellForm =  parallelFormBuilder.GetParallelForm(TempData["GraphMatrix"] as string[,]);
 
             if (paralellForm == null)
                 RedirectToAction("RunExpression");

@@ -4,6 +4,6 @@ namespace GraphSharpDemo.Extensibility
 {
     public interface IParallelFormBuilder
     {
-        List<List<int>> GetParallelForm(int[,] graphAsMatrix);
+        List<List<int>> GetParallelForm(string[,] graphAsMatrix);
     }
 }

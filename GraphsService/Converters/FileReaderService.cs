@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using GraphsExtensibility.Converters;
+using System.Text;
 
 namespace AutoGraph.Service.Converters
 {
@@ -17,6 +18,26 @@ namespace AutoGraph.Service.Converters
                 lines.Add(line);
             }
             file.Close();
+            return lines;
+        }
+
+        public List<string> ReadTextFromFile(Stream stream)
+        {
+            var lines = new List<string>();
+
+            string text;
+
+            stream.Position = 0;
+            using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
+            {
+               text = reader.ReadToEnd();
+            }
+            foreach (var item in text.Split('\n')) 
+            {
+                lines.Add(item);
+            }
+
+            stream.Close();
             return lines;
         }
     }

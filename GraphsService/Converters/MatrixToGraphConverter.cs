@@ -8,7 +8,7 @@ namespace GraphsService.Converters
 {
     public class MatrixToGraphConverter : IMatrixToGraphConverter
     {
-        public List<NodesConnection> Convert(int[,] matrix)
+        public List<NodesConnection> Convert(string[,] matrix)
         {
             var nodes = new List<Node>();
             var connections = new List<NodesConnection>();
@@ -19,9 +19,9 @@ namespace GraphsService.Converters
             {
                 for (var column = 0; column < size; column++)
                 {
-                    if (matrix[line, column] != 0)
+                    if (matrix[line, column] != "0" && matrix[line, column] != "0\r")
                     {
-                        int value = matrix[line, column];
+                        string value = matrix[line, column];
                         var nodeA = new Node(line+1, value);
                         var nodeB = new Node(column + 1, value);
 

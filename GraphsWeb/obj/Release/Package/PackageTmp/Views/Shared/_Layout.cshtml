@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script src="../src/sigma.core.js"></script>
+    <script src="../src/conrad.js"></script>
+    <script src="../src/utils/sigma.utils.js"></script>
+    <script src="../src/utils/sigma.polyfills.js"></script>
+    <script src="../src/sigma.settings.js"></script>
+    <script src="../src/classes/sigma.classes.dispatcher.js"></script>
+    <script src="../src/classes/sigma.classes.configurable.js"></script>
+    <script src="../src/classes/sigma.classes.graph.js"></script>
+    <script src="../src/classes/sigma.classes.camera.js"></script>
+    <script src="../src/classes/sigma.classes.quad.js"></script>
+    <script src="../src/captors/sigma.captors.mouse.js"></script>
+    <script src="../src/captors/sigma.captors.touch.js"></script>
+    <script src="../src/renderers/sigma.renderers.canvas.js"></script>
+    <script src="../src/renderers/sigma.renderers.webgl.js"></script>
+    <script src="../src/renderers/sigma.renderers.def.js"></script>
+    <script src="../src/renderers/webgl/sigma.webgl.nodes.def.js"></script>
+    <script src="../src/renderers/webgl/sigma.webgl.nodes.fast.js"></script>
+    <script src="../src/renderers/webgl/sigma.webgl.edges.def.js"></script>
+    <script src="../src/renderers/webgl/sigma.webgl.edges.fast.js"></script>
+    <script src="../src/renderers/webgl/sigma.webgl.edges.arrow.js"></script>
+    <script src="../src/renderers/canvas/sigma.canvas.labels.def.js"></script>
+    <script src="../src/renderers/canvas/sigma.canvas.hovers.def.js"></script>
+    <script src="../src/renderers/canvas/sigma.canvas.nodes.def.js"></script>
+    <script src="../src/renderers/canvas/sigma.canvas.edges.def.js"></script>
+    <script src="../src/renderers/canvas/sigma.canvas.edges.curve.js"></script>
+    <script src="../src/renderers/canvas/sigma.canvas.edges.arrow.js"></script>
+    <script src="../src/renderers/canvas/sigma.canvas.edges.curvedArrow.js"></script>
+    <script src="../src/middlewares/sigma.middlewares.rescale.js"></script>
+    <script src="../src/middlewares/sigma.middlewares.copy.js"></script>
+    <script src="../src/misc/sigma.misc.animation.js"></script>
+    <script src="../src/misc/sigma.misc.bindEvents.js"></script>
+    <script src="../src/misc/sigma.misc.drawHovers.js"></script>
+    <!-- END SIGMA IMPORTS -->
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.19.1/vis.min.css" rel="stylesheet" />
+    <script src="~/Scripts/angular.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.19.1/vis.min.js"></script>
+    <script src="~/Scripts/MainPageScript.js"></script>
+</head>
+<style>
+    #sidebar {
+        background-color: #ddd;
+        float: left;
+        width: 150px;
+        height: 2000px;
+    }
+</style>
+<body>
+    <div id="sidebar" class="navbar navbar-inverse">
+        <div class="container">
+            <div class="sidebar-nav">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Головна сторінка", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Побудувати ЯПФ", "RunExpression", "Home")</li>
+                    <li>@Html.ActionLink("Теоретичні відомості", "About", "Home")</li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+    </div>
+
+    <footer>
+        <p>&copy; @DateTime.Now.Year</p>
+    </footer>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

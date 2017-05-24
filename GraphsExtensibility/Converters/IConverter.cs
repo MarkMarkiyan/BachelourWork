@@ -4,6 +4,6 @@ namespace GraphsExtensibility.Converters
 {
     public interface IConverter
     {
-        int[,] Convert(IEnumerable<string> lines);
+        string[,] Convert(IEnumerable<string> lines);
     }
 }

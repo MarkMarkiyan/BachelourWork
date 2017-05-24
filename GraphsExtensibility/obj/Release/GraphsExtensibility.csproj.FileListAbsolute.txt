@@ -1,0 +1,5 @@
+E:\марк\BachelourWork\GraphsExtensibility\bin\Release\GraphsExtensibility.dll
+E:\марк\BachelourWork\GraphsExtensibility\bin\Release\GraphsExtensibility.pdb
+E:\марк\BachelourWork\GraphsExtensibility\obj\Release\GraphsExtensibility.csprojResolveAssemblyReference.cache
+E:\марк\BachelourWork\GraphsExtensibility\obj\Release\GraphsExtensibility.dll
+E:\марк\BachelourWork\GraphsExtensibility\obj\Release\GraphsExtensibility.pdb

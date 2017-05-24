@@ -9,10 +9,10 @@ namespace GraphsService.Converters
     {
         private char seperator = ' ';
 
-        public int[,] Convert(IEnumerable<string> lines)
+        public string[,] Convert(IEnumerable<string> lines)
         {
             var size = lines.ToList().Count;
-            int[,] graphMatrix = new int[size, size];
+            string[,] graphMatrix = new string[size, size];
 
             int lineIndex = 0;
             foreach (var line in lines)
@@ -21,7 +21,7 @@ namespace GraphsService.Converters
                 var itemsInRow = line.Split(seperator);
                 foreach (var item in itemsInRow)
                 {
-                    graphMatrix[lineIndex, columnIndex] = Int32.Parse(item);
+                    graphMatrix[lineIndex, columnIndex] = item;
                     columnIndex++;
                 }
 
