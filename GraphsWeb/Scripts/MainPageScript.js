@@ -2,9 +2,9 @@
 
 mainApp.controller('MainPageController',
     function ($scope, $http) {
-        
         $scope.lineralVisible = true;
         $scope.paralellVisible = false;
+        $scope.optimizedFormVisible = false;
 
         $scope.buttonName = "Відкрити ярусно-паралельну форму";
         $scope.concurrency = "";
@@ -18,7 +18,7 @@ mainApp.controller('MainPageController',
             if ($scope.lineralVisible == true) {
                 $scope.lineralVisible = false;
                 $scope.paralellVisible = true;
-                $scope.buttonName = "Відкрити лінійну форму";
+                $scope.buttonName = "Відкрити граф алгоритму";
             }
             else {
                 $scope.lineralVisible = true;
@@ -26,6 +26,88 @@ mainApp.controller('MainPageController',
                 $scope.buttonName = "Відкрити ярусно-паралельну форму";
             }
         }
+        $scope.GetOptimizedForm = function () {
+            var requestData = {
+                Connections: model.NodesConnections,
+                Cuncurency: $scope.concurrency
+            };
+            $http({
+
+                method: 'POST',
+                url: "/api/GraphDataApi/GetOptimizedParalelForm",
+                data: requestData 
+                })
+                .then(function (response) {
+
+                    $('#optimized-graph-container').remove();
+                    $('#graph').html('<div id="optimized-graph-container" ng-show="optimizedFormVisible" ng-controller="lineralFormController"></div>');
+                    $scope.lineralVisible = false;
+                    $scope.paralellVisible = false;
+                    $scope.optimizedFormVisible = true;
+
+                    var g = {
+                        nodes: [],
+                        edges: []
+                    };
+
+                    var levelsLengh = [];
+                    levelsLengh.push(0);
+                    for (var i = 1; i < response.data.ParallelForm.length; i++) {
+                        if (i == response.data.ParallelForm.length - 1) {
+                            levelsLengh.push(response.data.ParallelForm[0].length / 2);
+                            g.nodes.push({
+                                id: response.data.NodesConnections[response.data.NodesConnections.length - 1].Child.Index.toString(),
+                                label: response.data.NodesConnections[response.data.NodesConnections.length - 1].Child.Value,
+                                x: i * 10,
+                                y: response.data.ParallelForm[0].length * 5,
+                                size: 10,
+                                color: '#666'
+                            });
+                        }
+                        else {
+                            levelsLengh.push((response.data.ParallelForm[0].length - response.data.ParallelForm[i + 1].length) / 2);
+                        }
+                    }
+
+                    for (var i = 0; i < response.data.NodesConnections.length; i++) {
+                        var level = GetLevel(response.data.NodesConnections[i].Parent.Index, response.data.ParallelForm);
+                        g.nodes.push({
+                            id: response.data.NodesConnections[i].Parent.Index.toString(),
+                            label: response.data.NodesConnections[i].Parent.Value,
+                            y: level * 10,
+                            x: levelsLengh[level] * 10,
+                            size: 10,
+                            color: '#666'
+                        });
+                        levelsLengh[level]++;
+                        g.edges.push({
+                            id: 'e' + i,
+                            source: response.data.NodesConnections[i].Parent.Index.toString(),
+                            target: response.data.NodesConnections[i].Child.Index.toString(),
+                            size: 5,
+                            color: '#3b3300'
+                        });
+                    }
+
+                    s = new sigma({
+                        graph: g,
+                        container: 'optimized-graph-container'
+                    });
+                }, function (response) {
+                    alert("w");
+                });
+        };
+        function GetLevel(index, levels) {
+
+            for (var i = 0; i < levels.length; i++) {
+                for (var j = 0; j < levels[i].length; j++) {
+                    if (levels[i][j] == index)
+                        return i;
+                }
+            }
+            return -1;
+        }
+
     });
 
 mainApp.controller("runExtensionController",
@@ -89,7 +171,7 @@ function ($scope) {
                 source: model.NodesConnections[i].Parent.Index.toString(),
                 target: model.NodesConnections[i].Child.Index.toString(),
                 size: 5,
-                color: '#ccc'
+                color: '#3b3300'
             });
         }
 
@@ -168,7 +250,7 @@ function () {
                 source: model.NodesConnections[i].Parent.Index.toString(),
                 target: model.NodesConnections[i].Child.Index.toString(),
                 size: 5,
-                color: '#ccc'
+                color: '#3b3300'
             });
         }
 

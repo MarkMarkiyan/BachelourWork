@@ -17,7 +17,18 @@
         <label for="file">Завантажте текстовий документ:</label>  
         <input type="file" name="file" id="file"/><br><br>  
         <input type="submit" class="btn-info" value="Відобразити ЯПФ"/>  
-        <br><br>  
-        @ViewBag.Message  
+        <br><br>
+        <h4>З прикладом вхідних даних можна ознайомитись на сторінці: @Html.ActionLink("теорія", "Index", "About")</h4>  
+    }
+    @using (Html.BeginForm("ViewResultFromExtension",
+                "Home",
+                FormMethod.Post,
+                new { enctype = "multipart/form-data" }))
+    {
+        <label for="file">Або ж введіть вираз в текстове полу:</label>
+        <input type="text" name="extension"/><br><br>
+        <input type="submit" class="btn-info" value="Відобразити ЯПФ" />
+        <br><br>
+        <h4>З прикладом вхідних даних можна ознайомитись на сторінці: @Html.ActionLink("теорія", "Index", "About")</h4>
     }
 </div>

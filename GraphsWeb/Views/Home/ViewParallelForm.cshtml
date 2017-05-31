@@ -16,30 +16,44 @@
     </style>
     <div>
         <button class="btn-info" ng-click="OpenConcurrency()">Обмежити кількість процесорів</button>
-        
+
         <div ng-show="concurrencyVisible">
             <label>Введіть максимальну довжину яруса:</label>
             <input ng-model="concurrency" />
-            <button class="btn-info" ng-click="OpenCPFClick()">Застосувати</button>
+            <button class="btn-info" ng-click="GetOptimizedForm()">Застосувати</button>
         </div>
         <button class="btn-info" ng-bind="buttonName" ng-click="OpenCPFClick()" />
     </div>
     <style>
-        #graph-container {  
-            top: 150px; 
+        #graph-container {
+            top: 150px;
             bottom: 150px;
-            left: 100px;    
+            left: 100px;
             right: 100px;
             height: 500px;
             display: block;
             border: 4px black;
         }
     </style>
-    <hr/>
-    <br/>
+    <hr />
+    <br />
     <div ng-show="paralellVisible" ng-controller="parallelFormController" id="graph-container"></div>
     <style>
         #lineral-graph-container {
+            top: 150px;
+            bottom: 150px;
+            left: 100px;
+            right: 100px;
+            height: 500px;
+            display: block;
+            border: 4px black;
+        }
+    </style>
+    <div id="graph">
+        <div id="optimized-graph-container" ng-show="optimizedFormVisible" ng-controller="lineralFormController"></div>
+    </div>
+    <style>
+        #optimized-graph-container {
             top: 150px;
             bottom: 150px;
             left: 100px;

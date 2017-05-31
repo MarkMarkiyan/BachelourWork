@@ -53,40 +53,62 @@ namespace GraphsService
             return paralellForm;
         }
 
-        public List<List<int>> GetOptimizeParalellForm(List<List<int>> parallelForm, int[,] graphAsMatrix, int councurency)
+        public List<List<int>> GetOptimizedParallelForm(string[,] graphAsMatrix, int cuncurency)
         {
-            var newParallelForm = new List<List<int>>();
+            if (graphAsMatrix == null)
+                return null;
 
-            newParallelForm.Add(parallelForm[0]);
-
-            var newLevel = new List<int>();
-
-            for (int i = 1; i < parallelForm.Count; i++)
+            var numOfArguments = getNumOfArguments(graphAsMatrix);
+            var firstLayer = new List<int>();
+            for (int i = 0; i < numOfArguments; i++)
             {
-                for (int j = 0; j < parallelForm[i].Count; j++)
+                firstLayer.Add(i + 1);
+            }
+
+                var paralellForm = new List<List<int>> { firstLayer };
+
+            var size = Math.Sqrt(graphAsMatrix.Length);
+            var currentSize = numOfArguments;
+
+            while (currentSize < size)
+            {
+                var newLayer = new List<int>();
+
+                for (int column = numOfArguments; column < size; column++)
                 {
-                    if(!CheckForDependency(graphAsMatrix, newLevel, parallelForm[i][j]))
-                    newLevel.Add(parallelForm[i][j]);
-                    if (newLevel.Count >= 2)
+                    if (isParentValid(paralellForm, column + 1))
                     {
-                        newParallelForm.Add(newLevel);
-                        newLevel = new List<int>();
+                        continue;
+                    }
+                    var isNodeValid = true;
+                    for (int line = 0; line < size; line++)
+                    {
+                        if (graphAsMatrix[line, column] != "0" && !isParentValid(paralellForm, line + 1))
+                        {
+                            isNodeValid = false;
+                            break;
+                        }
+                    }
+                    if (isNodeValid)
+                    {
+                        newLayer.Add(column + 1);
+                        if (newLayer.Count >= cuncurency)
+                        {
+                            paralellForm.Add(newLayer);
+                            currentSize += newLayer.Count;
+
+                            newLayer = new List<int>();
+                        }
                     }
                 }
+
+                if (newLayer.Count > 0)
+                    paralellForm.Add(newLayer);
+                currentSize += newLayer.Count;
             }
-            return newParallelForm; 
+            return paralellForm;
         }
 
-        private bool CheckForDependency(int[,] parallelForm, List<int> level,  int element) {
-
-            for (int i = 0; i < level.Count; i++)
-            {
-                if (parallelForm[level[i], element] == 1)
-                    return true;
-            }
-
-            return false;
-        }
 
         private bool isParentValid(List<List<int>> layers, int nodeIndex)
         {

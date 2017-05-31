@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using GraphsExtensibility.Models;
 using System.Collections.Generic;
+using GraphSharpDemo.Service.Converters;
 
 namespace GraphsWeb.Controllers
 {
@@ -16,11 +17,14 @@ namespace GraphsWeb.Controllers
         private readonly IFileReaderService fileReaderService;
         private readonly IConverter converter;
         private readonly IMatrixToGraphConverter matrixToGraphConverter;
-
         private readonly IParallelFormBuilder parallelFormBuilder;
+        private readonly ExpressionToMatrixConverter expressionToMatrixConverter;
+        private readonly StringToExpressionConverter stringToExpressionConverter;
 
         public HomeController()
         {
+            expressionToMatrixConverter = new ExpressionToMatrixConverter();
+            stringToExpressionConverter = new StringToExpressionConverter();
             fileReaderService = new FileReaderService();
             converter = new FileToMatrixConverter();
             matrixToGraphConverter = new MatrixToGraphConverter();
@@ -49,7 +53,6 @@ namespace GraphsWeb.Controllers
             return View();
         }
 
-
         public ActionResult ViewResult(HttpPostedFileBase file)
         {
             var fileT = fileReaderService.ReadTextFromFile(file.InputStream);
@@ -59,6 +62,13 @@ namespace GraphsWeb.Controllers
             TempData["GraphMatrix"] = matrix;
 
             TempData["Graph"] = graphForm;
+            return RedirectToAction("ViewParallelForm");
+        }
+
+        public ActionResult ViewResultFromExtension(string extension)
+        {
+            var ext = stringToExpressionConverter.Convert(extension);
+            var res = expressionToMatrixConverter.Convert(new List<ExpressionElement>(ext));
             return RedirectToAction("ViewParallelForm");
         }
 

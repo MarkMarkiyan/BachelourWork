@@ -1,20 +1,10 @@
-﻿namespace GraphsExtensibility.Models
+﻿using GraphsExtensibility.Models.Enums;
+
+namespace GraphsExtensibility.Models
 {
     public class ExpressionElement
     {
-
-        public ExpressionElement(string value) {
-            this.Value = value;
-        }
-        string Value { get; set; }
-
-        bool IsNumber
-        {
-            get
-            {
-                int result;
-                return int.TryParse(Value, out result);
-            }
-        }
+        public int? Value { get; set; }
+        public ElementType Type { get; set; }
     }
 }

@@ -44,9 +44,11 @@
     <Compile Include="Converters\IFileReaderService.cs" />
     <Compile Include="Converters\IMatrixToGraphConverter.cs" />
     <Compile Include="IParallelFormBuilder.cs" />
+    <Compile Include="Models\Enums\ElementType.cs" />
     <Compile Include="Models\ExpressionElemet.cs" />
     <Compile Include="Models\Node.cs" />
     <Compile Include="Models\NodesConnection.cs" />
+    <Compile Include="Models\OptimizeModel.cs" />
     <Compile Include="Models\ParalellFormModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validators\IFileValidator.cs" />

@@ -45,10 +45,6 @@
     <script src="~/Scripts/MainPageScript.js"></script>
 </head>
 <style>
-    body {
-        background-image: url("../../Content/chainimage-grey-grid-texture-wallpaper-abstract-wallpapers-21387.jpg");
-    }
-
     #sidebar {
         background-color: #ddd;
         float: left;
@@ -57,30 +53,30 @@
     }
 </style>
 <body>
-    <div id="sidebar" class="navbar navbar-inverse">
-        <div class="container">
-            <div class="sidebar-nav">
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Головна сторінка", "Index", "Home")</li>
                     <li>@Html.ActionLink("Побудувати ЯПФ", "RunExpression", "Home")</li>
                     <li>@Html.ActionLink("Теоретичні відомості", "About", "Home")</li>
                 </ul>
-                @Html.Partial("_LoginPartial")
+                <ul class="nav navbar-nav navbar-right">
+                </ul>
             </div>
         </div>
-    </div>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-        </div>
-    </div>
+    </nav>
     <div class="container body-content">
         @RenderBody()
         <hr />
     </div>
-
-    <footer>
-        <p>&copy; @DateTime.Now.Year</p>
-    </footer>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
